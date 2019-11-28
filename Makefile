@@ -1,7 +1,7 @@
 .PHONY: test sdist wheel release pre-release clean
 
 test:
-	coverage run --source=model_field_list runtests.py
+	coverage run --source=model_field_list tests/runtests.py
 	coverage report -m
 
 sdist:
