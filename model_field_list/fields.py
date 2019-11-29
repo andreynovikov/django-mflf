@@ -25,7 +25,7 @@ class SeparatedValuesField(models.TextField):
             return value
         return value.split(self.separator)
 
-    def from_db_value(self, value, expression, connection):
+    def from_db_value(self, value, expression, connection, *args):
         return self.to_python(value)
 
     def get_prep_value(self, value):
@@ -60,10 +60,9 @@ class ModelFieldListField(SeparatedValuesField):
         return name, path, args, kwargs
 
     def check(self, **kwargs):
-        return [
-            *super(ModelFieldListField, self).check(**kwargs),
-            *self._check_source_model(),
-        ]
+        errors = super(ModelFieldListField, self).check(**kwargs)
+        errors.extend(self._check_source_model(**kwargs))
+        return errors
 
     def _check_source_model(self):
         if not self.source_model:
