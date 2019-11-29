@@ -43,3 +43,7 @@ jobs:
     - name: Test with coverage
       run: |
         coverage run --source=model_field_list setup.py test
+    - name: Report coverage to Codacy
+      run: |
+        coverage xml
+        python-codacy-coverage --token ${{ secrets.CODACY_TOKEN }} --report coverage.xml
