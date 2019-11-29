@@ -13,7 +13,7 @@ class SeparatedValuesField(models.TextField):
         super(SeparatedValuesField, self).__init__(verbose_name, name, **kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super().deconstruct()
+        name, path, args, kwargs = super(SeparatedValuesField, self).deconstruct()
         if self.separator is not None:
             kwargs['separator'] = self.separator
         return name, path, args, kwargs
@@ -53,7 +53,7 @@ class ModelFieldListField(SeparatedValuesField):
         super(ModelFieldListField, self).__init__(verbose_name, name, **kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super().deconstruct()
+        name, path, args, kwargs = super(ModelFieldListField, self).deconstruct()
         del kwargs['choices']
         if self.source_model is not None:
             kwargs['source_model'] = self.source_model
@@ -107,7 +107,7 @@ class ModelFieldListField(SeparatedValuesField):
 
 class ModelFieldListFormField(forms.MultipleChoiceField):
     def __init__(self, source_model=None, **kwargs):
-        super().__init__(**kwargs)
+        super(ModelFieldListFormField, self).__init__(**kwargs)
         self.source_model = source_model
         if self.source_model:
             self.choices = list(
