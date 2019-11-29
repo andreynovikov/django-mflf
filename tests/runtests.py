@@ -20,12 +20,14 @@ settings.configure(
         "django.contrib.sessions",
         "django.contrib.sites",
         "django.contrib.admin",
+        "django.contrib.messages",
         "model_field_list",
         "testapp",
     ],
     MIDDLEWARE=(
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
     ),
     ROOT_URLCONF='testapp.urls',
     TEMPLATES=[
