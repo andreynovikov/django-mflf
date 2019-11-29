@@ -106,7 +106,7 @@ class ModelFieldListField(SeparatedValuesField):
 
 
 class ModelFieldListFormField(forms.MultipleChoiceField):
-    def __init__(self, *, source_model, **kwargs):
+    def __init__(self, source_model=None, **kwargs):
         super().__init__(**kwargs)
         self.source_model = source_model
         if self.source_model:
