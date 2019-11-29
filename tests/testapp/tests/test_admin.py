@@ -1,26 +1,26 @@
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin.sites import AdminSite
 from django.forms.widgets import SelectMultiple
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.test.utils import override_settings
 
 from testapp.models import ProductGroup
 
 
-class MockSuperUser:
-    def has_perm(self, perm):
-        return True
-
-
 @override_settings(ROOT_URLCONF='testapp.urls_admin')
 class MFLFAdminTests(TestCase):
+    fixtures = ['tests']
 
     def setUp(self):
         site = AdminSite()
         self.admin = ModelAdmin(ProductGroup, site)
-        request_factory = RequestFactory()
-        self.request = request_factory.get('/admin')
-        self.request.user = MockSuperUser()
+
+    def testForm(self):
+        form_class = self.admin.get_form(None)
+        form = form_class({'title': 'Spheres', 'fields': ['color', 'weight']}, instance=ProductGroup.objects.get(pk=1))
+        self.assertTrue(form.is_valid())
+        form = form_class({'title': 'Spheres', 'fields': ['color', 'size']}, instance=ProductGroup.objects.get(pk=2))
+        self.assertFalse(form.is_valid())
 
     def testFieldListWidget(self):
         form = self.admin.get_form(None)

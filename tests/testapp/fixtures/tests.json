@@ -1,0 +1,18 @@
+[
+  {
+    "model" : "testapp.productgroup",
+    "pk" : 1,
+    "fields" : {
+        "title" : "Cubes",
+	    "fields" : "color,weight"
+    }
+  },
+  {
+    "model" : "testapp.productgroup",
+    "pk" : 2,
+    "fields" : {
+        "title" : "Boxes",
+        "fields" : "color,material"
+    }
+  }
+]
