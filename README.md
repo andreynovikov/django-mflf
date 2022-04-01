@@ -5,8 +5,8 @@
 [![PyPI release](https://img.shields.io/pypi/v/django-mflf.svg)](https://pypi.org/project/django-mflf/)
 [![Python version](https://img.shields.io/pypi/pyversions/django-mflf.svg)](https://pypi.org/project/django-mflf/)
 [![GitHub issues](https://img.shields.io/github/issues/andreynovikov/django-mflf.svg)](https://github.com/andreynovikov/django-mflf/issues)
-[![Code quality](https://img.shields.io/codacy/grade/a5a3ea9630fd4dcbaed3853b8d868b6d.svg)](https://www.codacy.com/app/novikov/django-mflf)
-[![Coverage](https://img.shields.io/codacy/coverage/a5a3ea9630fd4dcbaed3853b8d868b6d.svg)](https://www.codacy.com/app/novikov/django-mflf)
+[![Codacy grade](https://img.shields.io/codacy/grade/2c886ef7ab034d44bd36c0e187f213d9)](https://www.codacy.com/gh/andreynovikov/django-mflf)
+[![Codacy coverage](https://img.shields.io/codacy/coverage/2c886ef7ab034d44bd36c0e187f213d9)](https://www.codacy.com/app/novikov/django-mflf)
 [![GitHub license](https://img.shields.io/github/license/andreynovikov/django-mflf.svg)](LICENSE)
 
 This is a Django model field that provides a list of some other model's fields. Fields can be multi-selected and "under the hood" are stored as a comma-separated string. Also package provides simple form field with the same capabilities.
