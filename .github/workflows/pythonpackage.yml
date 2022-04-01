@@ -11,16 +11,16 @@ jobs:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9, 3.10]
         django-version: [3.1, 3.2, 4.0]
-	include:
+        include:
           - python-version: 2.7
             django-version: 1.11
-	include:
+        include:
           - python-version: 3.5
             django-version: 2.0
-	include:
+        include:
           - python-version: 3.5
             django-version: 2.1
-	include:
+        include:
           - python-version: 3.5
             django-version: 2.2
         exclude:
