@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='django-mflf',
-    version='0.0.1',
+    version='0.1.0',
     license='MIT',
     author='Andrey Novikov',
     author_email='novikov@gmail.com',
