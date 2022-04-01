@@ -64,7 +64,7 @@ class ModelFieldListField(SeparatedValuesField):
         errors.extend(self._check_source_model(**kwargs))
         return errors
 
-    def _check_source_model(self):
+    def _check_source_model(self, **kwargs):
         if not self.source_model:
             return [
                 checks.Error(
