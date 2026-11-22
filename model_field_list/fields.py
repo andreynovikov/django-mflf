@@ -13,7 +13,7 @@ class SeparatedValuesField(models.TextField):
         super(SeparatedValuesField, self).__init__(verbose_name, name, **kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super(SeparatedValuesField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         if self.separator is not None:
             kwargs['separator'] = self.separator
         return name, path, args, kwargs
@@ -25,13 +25,13 @@ class SeparatedValuesField(models.TextField):
             return value
         return value.split(self.separator)
 
-    def from_db_value(self, value, expression, connection, *args):
+    def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
     def get_prep_value(self, value):
         if value is None:
             return value
-        assert(isinstance(value, list) or isinstance(value, tuple))
+        assert (isinstance(value, list) or isinstance(value, tuple))
         return self.separator.join([s for s in value])
 
     def value_to_string(self, obj):
@@ -53,18 +53,19 @@ class ModelFieldListField(SeparatedValuesField):
         super(ModelFieldListField, self).__init__(verbose_name, name, **kwargs)
 
     def deconstruct(self):
-        name, path, args, kwargs = super(ModelFieldListField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         del kwargs['choices']
         if self.source_model is not None:
             kwargs['source_model'] = self.source_model
         return name, path, args, kwargs
 
     def check(self, **kwargs):
-        errors = super(ModelFieldListField, self).check(**kwargs)
-        errors.extend(self._check_source_model(**kwargs))
-        return errors
+        return [
+            *super(ModelFieldListField, self).check(**kwargs),
+            *self._check_source_model(),
+        ]
 
-    def _check_source_model(self, **kwargs):
+    def _check_source_model(self):
         if not self.source_model:
             return [
                 checks.Error(
@@ -106,8 +107,8 @@ class ModelFieldListField(SeparatedValuesField):
 
 
 class ModelFieldListFormField(forms.MultipleChoiceField):
-    def __init__(self, source_model=None, **kwargs):
-        super(ModelFieldListFormField, self).__init__(**kwargs)
+    def __init__(self, *, source_model, **kwargs):
+        super().__init__(**kwargs)
         self.source_model = source_model
         if self.source_model:
             self.choices = list(
