@@ -1,19 +1,20 @@
-.PHONY: test sdist wheel release pre-release clean
+.PHONY: test coverage build release pre-release clean
 
 test:
+	tox
+
+coverage:
 	coverage run --source=model_field_list tests/runtests.py
 	coverage report -m
 
-sdist:
-	python setup.py sdist
+build:
+	python -m build
 
-wheel:
-	python setup.py bdist_wheel --universal
-
-release: clean sdist wheel
+# Releases are published by GitHub workflow on version tag, these targets are a manual fallback
+release: clean build
 	twine upload dist/*
 
-pre-release: sdist wheel
+pre-release: clean build
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 clean:
